@@ -3,14 +3,12 @@ package cylin0201.blog_exercise.controller;
 import cylin0201.blog_exercise.domain.Article;
 import cylin0201.blog_exercise.dto.AddArticleRequest;
 import cylin0201.blog_exercise.dto.ArticleResponse;
+import cylin0201.blog_exercise.dto.UpdateArticleRequest;
 import cylin0201.blog_exercise.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,13 @@ public class BlogApiController {
                 .toList();
         return ResponseEntity.ok()
                 .body(articles);
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request){
+        Article updatedArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updatedArticle);
     }
 }

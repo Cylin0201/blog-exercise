@@ -1,10 +1,12 @@
 package cylin0201.blog_exercise.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
 public class Article {
@@ -21,6 +23,11 @@ public class Article {
 
     @Builder
     public Article(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+
+    public void update(String title, String content){
         this.title = title;
         this.content = content;
     }
