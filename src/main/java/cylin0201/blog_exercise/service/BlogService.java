@@ -17,6 +17,11 @@ public class BlogService {
         return blogRepository.save(request.toEntity());
     }
 
+    public Article findByID(long id){
+        return blogRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("not found: " + id));
+    }
+
     public List<Article> findAll(){
         return blogRepository.findAll();
     }
